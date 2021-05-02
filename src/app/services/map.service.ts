@@ -4,6 +4,7 @@ import * as Cesium from 'cesium';
 
 import { constants } from 'src/constants';
 import { environment } from 'src/environments/environment';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +22,7 @@ export class MapService {
     return viewer;
   }
 
-  getTle(noradId: number) {
+  getTle(noradId: number): Observable<any> {
     return this.http.get(
       environment.apiBaseUrl +
         'tle/' +
