@@ -1,10 +1,12 @@
 import { Injectable, ElementRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import * as Cesium from 'cesium';
+import { Observable } from 'rxjs';
 
 import { constants } from 'src/constants';
 import { environment } from 'src/environments/environment';
-import { Observable } from 'rxjs';
+import { TleResponseModel } from '../models/tle-response.model';
+
 
 @Injectable({
   providedIn: 'root',
@@ -16,14 +18,8 @@ export class MapService {
     Cesium.Ion.defaultAccessToken = constants.defaultAccessToken;
   }
 
-  renderEarth(el: ElementRef) {
-    const viewer = new Cesium.Viewer(el.nativeElement);
-
-    return viewer;
-  }
-
-  getTle(noradId: number): Observable<any> {
-    return this.http.get(
+  getTle(noradId: number): Observable<TleResponseModel> {
+    return this.http.get<TleResponseModel>(
       environment.apiBaseUrl +
         'tle/' +
         noradId +
