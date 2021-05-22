@@ -1,7 +1,7 @@
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
-const apiBaseUrl = 'https://www.n2yo.com/rest/v1/satellite/';
+const apiBaseUrl = 'https://api.n2yo.com/rest/v1/satellite/';
 const apiKey = 'YC9DQJ-37AG2W-N5G4NY-4KM3';
 
 export const environment = {
