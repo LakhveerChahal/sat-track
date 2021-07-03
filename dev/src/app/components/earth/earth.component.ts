@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { MapService } from '../services/map.service';
 import * as Cesium from 'cesium';
 import { getSatelliteInfo, getGroundTracks, getEpochTimestamp } from 'tle.js';
-import { TleResponseModel } from '../models/tle-response.model';
-import { SatelliteModel } from '../models/satellite.model';
+import { MapService } from 'src/app/services/map.service';
+import { TleResponseModel } from 'src/app/models/tle-response.model';
+import { SatelliteModel } from 'src/app/models/satellite.model';
 
 @Component({
   selector: 'app-earth',
@@ -106,7 +106,7 @@ export class EarthComponent implements OnInit {
     const entity: any = this.viewer.entities.getById(satellite.satId.toString());
 
     if (!entity) {
-      const pointEntity = this.viewer.entities.add({
+      this.viewer.entities.add({
         description: satellite.satName,
         position: Cesium.Cartesian3.fromDegrees(
           satInfo.lng,

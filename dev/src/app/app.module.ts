@@ -6,11 +6,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { EarthComponent } from './earth/earth.component';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    EarthComponent
+    EarthComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
