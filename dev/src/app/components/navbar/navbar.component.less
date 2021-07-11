@@ -1,7 +1,32 @@
 .navbar-wrapper{
     display: flex;
-    padding: 1em;
+    background-color: teal;
+    height: 4em;
+    align-items: center;
     .search-wrapper {
         margin-left: auto;
+        margin-right: 2em;
+        input[type="text"] {
+            height: 2em;
+            width: 150px;
+            box-sizing: border-box;
+            outline-width: 0;
+        }
+        .result-wrapper {
+            position: absolute;
+            width: 150px;
+            background-color: white;
+            box-sizing: border-box;
+            border: 1px solid lightslategray;
+            .result-link{
+                display: block;
+                padding: 0.5em;
+                font-family: 'sans-serif';
+            }
+            .result-link:hover {
+                background-color: lightcyan;
+                cursor: pointer;
+            }
+        }
     }
 }

@@ -1,5 +1,10 @@
 <div class="navbar-wrapper">
     <div class="search-wrapper">
-        <input type="text" name="search" id="search-sat">
+        <input type="text" name="search" id="search-sat" #searchEl>
+        <div class="result-wrapper">
+            <a class="result-link" *ngFor="let result of searchResults">
+                {{ result.satelliteName }}
+            </a>
+        </div>
     </div>
 </div>
