@@ -1,0 +1,26 @@
+<div class="result-wrapper">
+    <app-loading-overlay *ngIf="isSearching" [message]="'Loading Results'"></app-loading-overlay>
+    <div class="result-body">
+        <ng-container *ngFor="let result of searchResults">
+            <div class="result">
+                <div class="checkbox-wrapper">
+                    <label class="toggle-body">
+                        <input type="checkbox" class="actual-checkbox">
+                        <span class="ball"></span>
+                    </label>
+                </div>
+                <div class="result-name">
+                    <a class="result-link">
+                        {{ result.satelliteName }}
+                    </a>
+                </div>
+            </div>
+            <hr>
+        </ng-container>
+    </div>
+    <div class="result-footer">
+        <button class="apply-changes" >
+            Apply Changes
+        </button>
+    </div>
+</div>

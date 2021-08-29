@@ -1,0 +1,8 @@
+<div class="search-wrapper">
+    <input type="text" name="search" id="search-sat" #searchEl>
+    <app-search-result 
+        *ngIf="showResultPanel"
+        [isSearching]="isSearching"
+        [searchResults]="searchResults">
+    </app-search-result>
+</div>
