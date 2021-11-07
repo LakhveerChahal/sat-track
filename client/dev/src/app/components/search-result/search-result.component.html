@@ -6,7 +6,8 @@
                 <div class="checkbox-wrapper">
                     <label class="toggle-body">
                         <input type="checkbox" class="actual-checkbox" 
-                            (change)="toggleSatellite(result)">
+                            (change)="toggleSatellite(result)"
+                            [checked]="result.isRendered">
                         <span class="ball"></span>
                     </label>
                 </div>

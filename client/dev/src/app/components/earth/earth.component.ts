@@ -28,6 +28,7 @@ export class EarthComponent implements OnInit, OnDestroy {
 
   constructor(private mapService: MapService,
               private dataSharingService: DataSharingService) {
+    this.satellites = this.dataSharingService.satellites;
     this.satellites.push(new SatelliteModel(44943, null, false, false, null));
     this.satellites.push(new SatelliteModel(47799, null, false, false, null));
     // this.satellites.push(new SatelliteModel(45549, null, false, false, null));

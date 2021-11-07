@@ -4,9 +4,15 @@
     width: 30vw;
     background-color: white;
     box-sizing: border-box;
-    height: calc(100vh - 10em);
     border-radius: .5em;
+    transition: height 1s;
+    animation: animate-height 0.5s;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease;
     .result-body {
+      height: inherit;
       overflow-y: auto;
       .result {
         display: flex;
@@ -59,6 +65,15 @@
             font-family: sans-serif;
           }
         }
+      }
+    }
+
+    @keyframes animate-height {
+      from {
+        height: 0px;
+      }
+      to {
+        height: calc(100vh - 15em);
       }
     }
 }

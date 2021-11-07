@@ -7,6 +7,7 @@ import { Subject } from 'rxjs';
 })
 export class DataSharingService {
   toggleSelectedSatellite: Subject<SatelliteModel> = new Subject<SatelliteModel>();
+  readonly satellites: SatelliteModel[] = [];
 
   constructor() { }
 
