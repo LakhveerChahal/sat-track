@@ -7,6 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class LoadingOverlayComponent implements OnInit {
   @Input('message') message: string;
+  @Input('borderRadius') borderRadius: string = '0em';
 
   constructor() { }
 

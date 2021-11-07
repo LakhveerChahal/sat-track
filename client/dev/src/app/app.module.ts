@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { NavbarComponent } from '@features/navbar/navbar.component';
 import { EarthComponent } from "@features/earth/earth.component";
-import { SearchResultComponent } from './components/search-result/search-result/search-result.component';
+import { SearchResultComponent } from './components/search-result/search-result.component';
 import { SearchComponent } from './components/search/search.component';
 import { LoadingOverlayComponent } from './shared/loading-overlay/loading-overlay.component';
 import { LoaderComponent } from './shared/loader/loader.component';

@@ -25,13 +25,7 @@ export class SearchComponent implements OnInit, AfterViewInit {
         distinctUntilChanged(),
         switchMap((searchValue: string) => {
           this.isSearching = true;
-          // const dummyData: SearchSatellite[] = [];
-          // for (let index = 0; index < 20; index++) {            
-          //   dummyData.push(new SearchSatellite('Starlink1', '2312312'));
-          // }
-
           if (searchValue) 
-          // return of({ satellite: dummyData });
           return this.mapService.getSatelliteByName(searchValue)
 
           return empty();
@@ -45,8 +39,14 @@ export class SearchComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.searchEl.nativeElement.onkeyup = (ev: KeyboardEvent) => {
-      this.showResultPanel = true;
-      this.searchObs.next(this.searchEl.nativeElement.value);
+
+      const searchString = this.searchEl.nativeElement.value;
+      if(searchString) {
+        this.showResultPanel = true;
+        this.searchObs.next(searchString);
+      } else {
+        this.showResultPanel = false;
+      }
     }
   }
 }
