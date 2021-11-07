@@ -1,23 +1,33 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import * as Cesium from 'cesium';
 import { getSatelliteInfo, getGroundTracks, getEpochTimestamp } from 'tle.js';
-import { MapService } from 'src/app/services/map.service';
-import { TleResponseModel } from 'src/app/models/tle-response.model';
-import { SatelliteModel } from 'src/app/models/satellite.model';
+import { MapService } from '@services/map.service';
+import { TleResponseModel } from '@models/tle-response.model';
+import { SatelliteModel } from '@models/satellite.model';
+import { Subscription, timer, Subject } from 'rxjs';
+import { DataSharingService } from '@services/data-sharing.service';
+import { repeatWhen, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-earth',
   templateUrl: './earth.component.html',
   styleUrls: ['./earth.component.less']
 })
-export class EarthComponent implements OnInit {
+export class EarthComponent implements OnInit, OnDestroy {
   @ViewChild('mapContainer', { static: false }) mapContainer: ElementRef;
   viewer: Cesium.Viewer;
   satellites: SatelliteModel[] = [];
   globalRefreshCounter: number = 0;
   satelliteAsset: any = null;
 
-  constructor(private mapService: MapService) {
+  stopTimer = new Subject<void>();
+  refreshDataEvent = new Subject<void>();
+  isTimerStopped = false;
+
+  subscription = new Subscription();
+
+  constructor(private mapService: MapService,
+              private dataSharingService: DataSharingService) {
     this.satellites.push(new SatelliteModel(44943, null, false, false, null));
     this.satellites.push(new SatelliteModel(47799, null, false, false, null));
     // this.satellites.push(new SatelliteModel(45549, null, false, false, null));
@@ -28,10 +38,45 @@ export class EarthComponent implements OnInit {
 
   ngAfterViewInit(): void {
     this.viewer = this.renderEarth(this.mapContainer);
+    this.registerSubscriptions();
+  }
 
-    setInterval(() => {
+  ngOnDestroy(): void {
+    this.stopTimer.next();
+    this.subscription.unsubscribe();
+  }
+
+  registerSubscriptions(): void {
+    this.subscription.add(this.refreshDataEvent.subscribe(() => {
       this.refreshData();
-    }, 3000);
+    }));
+
+    this.subscription.add(this.dataSharingService.getToggleSelectedSatellite()
+    .subscribe((selectedSatellite: SatelliteModel) => {
+      const findIndex: number = this.satellites.findIndex((satellite) => satellite.satId == selectedSatellite.satId);
+      if(findIndex == -1) {
+        this.satellites.push(selectedSatellite);
+        this.stopTimer.next();
+        this.isTimerStopped = true;
+        this.refreshDataEvent.next();
+      } else {
+        this.satellites.splice(findIndex, 1);
+        this.removeSatelliteAndOrbit(selectedSatellite);
+      }
+    }));
+
+    this.startTimer();
+  }
+
+  startTimer(): void {
+    this.isTimerStopped = false;
+    this.subscription.add(
+      timer(0, 3000)
+      .pipe(takeUntil(this.stopTimer))
+      .subscribe(() => {
+        this.refreshDataEvent.next();
+      })
+    );
   }
 
   refreshData(): void {
@@ -131,6 +176,9 @@ export class EarthComponent implements OnInit {
       );
     }
     satellite.isRendered = true;
+    if(this.isTimerStopped) {
+      this.startTimer();
+    }
   }
 
   getSatelliteAssetAndRender(satInfo: any, satellite: SatelliteModel){
@@ -151,6 +199,11 @@ export class EarthComponent implements OnInit {
       id: satellite.satId.toString() + 'orbit'
     });
     satellite.isOrbitRendered = true;
+  }
+
+  removeSatelliteAndOrbit(satellite: SatelliteModel): void {
+    this.viewer.entities.removeById(satellite.satId.toString());
+    this.viewer.entities.removeById(satellite.satId.toString() + 'orbit');
   }
 
 }

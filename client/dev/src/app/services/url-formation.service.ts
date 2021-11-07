@@ -8,7 +8,6 @@ export class UrlFormationService {
   private baseUrl: string = environment.apiBaseUrl;
   private apiKey: string = environment.apiKey;
   private dbBaseUrl: string = environment.hasura.hasuraBaseUrl;
-  private dbHasuraKey: string = environment.hasura.hasuraSecretKey;
 
   constructor() { }
 

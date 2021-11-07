@@ -1,15 +1,12 @@
 .result-wrapper {
-    position: absolute;
-    top: 4em;
-    right: 0;
+    position: relative;
+    top: 1em;
     width: 30vw;
-    height: calc(100vh - 4em);
     background-color: white;
     box-sizing: border-box;
-    border-left: 1px solid lightslategray;
-    box-shadow: -5px 1px 4px 0px gray;
+    height: calc(100vh - 10em);
+    border-radius: .5em;
     .result-body {
-      height: calc(100vh - 7em);
       overflow-y: auto;
       .result {
         display: flex;
@@ -64,20 +61,4 @@
         }
       }
     }
-    .result-footer {
-      height: 3em;
-      .apply-changes {
-        height: 100%;
-        width: 100%;
-        color: white;
-        background-color: teal;
-        text-align: center;
-        cursor: pointer;
-      }
-      .apply-changes:hover {
-        opacity: 0.8;
-        transition: 0.3s;
-      }
-    }
-
 }
