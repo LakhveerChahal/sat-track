@@ -1,8 +1,11 @@
 <div class="search-wrapper">
-    <input type="text" name="search" id="search-sat" #searchEl placeholder="Search satellites">
-    <app-search-result 
-        *ngIf="showResultPanel"
-        [isSearching]="isSearching"
-        [searchResults]="searchResults">
-    </app-search-result>
+    <input type="text" name="search" id="search-sat" #searchEl placeholder="Search satellites" autocomplete="off">
+    <a class="cancel-btn" *ngIf="searchString"
+    (click)="clearSearch()">
+        <span class="material-icons">
+            close
+        </span>
+    </a>
 </div>
+<app-search-result *ngIf="showResultPanel" [isSearching]="isSearching" [searchResults]="searchResults">
+</app-search-result>
