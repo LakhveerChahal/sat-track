@@ -15,6 +15,7 @@ export class SearchComponent implements OnInit, AfterViewInit {
   searchResults: SearchSatellite[] = [];
   isSearching: boolean = false;
   showResultPanel: boolean = false;
+  searchString: string;
 
   constructor(private mapService: MapService) { }
 
@@ -39,14 +40,23 @@ export class SearchComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.searchEl.nativeElement.onkeyup = (ev: KeyboardEvent) => {
-
-      const searchString = this.searchEl.nativeElement.value;
-      if(searchString) {
-        this.showResultPanel = true;
-        this.searchObs.next(searchString);
-      } else {
-        this.showResultPanel = false;
-      }
+      this.searchString = this.searchEl.nativeElement.value;
+      this.onSearchStringChange();
     }
+  }
+
+  onSearchStringChange(): void {
+    if (this.searchString) {
+      this.showResultPanel = true;
+    } else {
+      this.showResultPanel = false;
+    }
+    this.searchObs.next(this.searchString);
+  }
+
+  clearSearch(): void {
+    this.searchEl.nativeElement.value = '';
+    const keyUpEvent = new KeyboardEvent('keyup');
+    this.searchEl.nativeElement.dispatchEvent(keyUpEvent);
   }
 }
