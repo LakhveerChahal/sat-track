@@ -30,8 +30,6 @@ export class EarthComponent implements OnInit, OnDestroy {
               private dataSharingService: DataSharingService) {
     this.satellites.push(new SatelliteModel(44943, null, false, false, null));
     this.satellites.push(new SatelliteModel(47799, null, false, false, null));
-    // this.satellites.push(new SatelliteModel(45549, null, false, false, null));
-    // this.satellites.push(new SatelliteModel(25444, null, false, false, null));
   }
 
   ngOnInit(): void { }
@@ -109,7 +107,9 @@ export class EarthComponent implements OnInit, OnDestroy {
   }
 
   renderEarth(el: ElementRef): Cesium.Viewer {
-    return new Cesium.Viewer(el.nativeElement);
+    return new Cesium.Viewer(el.nativeElement, {
+      timeline: false
+    });
   }
 
   getAllSatData(satellite: SatelliteModel): void {

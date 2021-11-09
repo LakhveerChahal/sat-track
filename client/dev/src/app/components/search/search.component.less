@@ -1,9 +1,10 @@
 .search-wrapper {
     height: 100%;
     width: 100%;
+    display: flex;
     #search-sat {
         height: 100%;
-        width: 100%;
+        width: 80%;
         padding: 0.5em 1em;
         border-radius: 3em;
         border-width: 0px;
@@ -11,5 +12,22 @@
         font-family: sans-serif;
         box-sizing: border-box;
         outline-width: 0;
+    }
+    .cancel-btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: auto;
+        align-self: center;
+        background: white;
+        height: 48px;
+        width: 48px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-family: sans-serif;
+    }
+    .cancel-btn:hover {
+        background-color: lightgray;
+        transition: background-color 0.3s;
     }
 }

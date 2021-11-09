@@ -3,17 +3,19 @@
     <div class="result-body">
         <ng-container *ngFor="let result of searchResults">
             <div class="result">
-                <div class="checkbox-wrapper">
-                    <label class="toggle-body">
-                        <input type="checkbox" class="actual-checkbox" 
-                            (change)="toggleSatellite(result)">
-                        <span class="ball"></span>
-                    </label>
-                </div>
                 <div class="result-name">
                     <a class="result-link">
+                        <span class="material-icons">
+                            satellite_alt
+                        </span>
                         {{ result.satelliteName }}
                     </a>
+                </div>
+                <div class="checkbox-wrapper">
+                    <label class="toggle-body">
+                        <input type="checkbox" class="actual-checkbox" (change)="toggleSatellite(result)" [checked]="result.isRendered">
+                        <span class="ball"></span>
+                    </label>
                 </div>
             </div>
             <hr>
