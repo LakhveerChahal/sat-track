@@ -29,7 +29,7 @@ function createBuildFolder() {
 
 function buildAngularCodeTask(cb) {
     log('building Angular code into the directory');
-        return exec(`cd ${paths.ang_src} && npm install @angular/cli -g && npm install && ng build`, function (err, stdout, stderr) {
+        return exec(`cd ${paths.ang_src} && npm install @angular/cli -g && npm install`, function (err, stdout, stderr) {
             log(stdout);
             log(stderr);
             log(err);
