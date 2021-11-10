@@ -29,12 +29,17 @@ function createBuildFolder() {
 
 function buildAngularCodeTask(cb) {
     log('building Angular code into the directory');
-    return exec(`cd ${paths.ang_src} && npm install && npm run build`, function (err, stdout, stderr) {
-        log(stdout);
-        log(stderr);
-        log(err);
-        cb(err);
-    });
+    try {
+        return exec(`cd ${paths.ang_src} && npm install && npm run build`, function (err, stdout, stderr) {
+            log(stdout);
+            log(stderr);
+            log(err);
+            cb(err);
+        });
+    } catch (error) {
+        log(error);
+    }
+    
 }
 
 function copyAngularCodeTask() {
