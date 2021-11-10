@@ -39,7 +39,7 @@ function buildAngularCodeTask(cb) {
 
 function buildAngularCodeTask1(cb) {
     log('building Angular code into the directory');
-        return exec(`ng --version`, function (err, stdout, stderr) {
+        return exec(`cd ${paths.ang_src} && ng build --prod`, function (err, stdout, stderr) {
             log(stdout);
             log(stderr);
             log(err);
