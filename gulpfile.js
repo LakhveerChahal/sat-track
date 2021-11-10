@@ -33,7 +33,6 @@ function buildAngularCodeTask(cb) {
             log(stdout);
             log(stderr);
             log(err);
-            cb(err);
         });
     
 }
