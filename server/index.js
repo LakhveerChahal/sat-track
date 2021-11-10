@@ -1,8 +1,8 @@
-import express from 'express';
-const app = express()
+const app = require('./app');
 
-app.get('/', function (req, res) {
-    res.send('Hello World')
+const { API_PORT } = process.env;
+const port = process.env.PORT || API_PORT;
+
+app.listen(port, () => {
+    console.log('listening on port: ' + port);
 });
-
-app.listen(3000);
