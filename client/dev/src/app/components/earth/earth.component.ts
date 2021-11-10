@@ -6,7 +6,7 @@ import { TleResponseModel } from '@models/tle-response.model';
 import { SatelliteModel } from '@models/satellite.model';
 import { Subscription, timer, Subject } from 'rxjs';
 import { DataSharingService } from '@services/data-sharing.service';
-import { repeatWhen, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-earth',
@@ -166,7 +166,7 @@ export class EarthComponent implements OnInit, OnDestroy {
         show: true,
         label: {
           text: satellite.satName,
-          
+          fillColor: satellite.orbitColor
         }
       });
     } else {
@@ -194,8 +194,8 @@ export class EarthComponent implements OnInit, OnDestroy {
     const en = this.viewer.entities.add({
       polyline: {
         positions: latlngs,
-        width: 4,
-        material: Cesium.Color.GREEN
+        width: 3,
+        material: satellite.orbitColor
       },
       id: satellite.satId.toString() + 'orbit'
     });
