@@ -10,7 +10,7 @@
 /node_modules
 
 # build
-/client/dev/dist/**/*
+/client/dev/dist
 
 # profiling files
 chrome-profiler-events*.json
