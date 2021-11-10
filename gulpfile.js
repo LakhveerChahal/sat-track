@@ -37,6 +37,16 @@ function buildAngularCodeTask(cb) {
     
 }
 
+function buildAngularCodeTask1(cb) {
+    log('building Angular code into the directory');
+        return exec(`ng --version`, function (err, stdout, stderr) {
+            log(stdout);
+            log(stderr);
+            log(err);
+        });
+    
+}
+
 function copyAngularCodeTask() {
     log('copying Angular code into the directory');
     return src(`${paths.ang_dist_src}`)
@@ -47,5 +57,6 @@ exports.default = series(
     clean,
     createBuildFolder,
     buildAngularCodeTask,
+    buildAngularCodeTask1,
     copyAngularCodeTask
 );
