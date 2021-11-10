@@ -32,6 +32,7 @@ function buildAngularCodeTask(cb) {
     return exec(`cd ${paths.ang_src} && npm install && npm run build`, function (err, stdout, stderr) {
         log(stdout);
         log(stderr);
+        log(err);
         cb(err);
     });
 }

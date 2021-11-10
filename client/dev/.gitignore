@@ -11,6 +11,7 @@
 
 # build
 dist/
+public/
 
 # profiling files
 chrome-profiler-events*.json
