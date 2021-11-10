@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "server satrack application",
   "main": "index.js",
+  "engines": {
+    "node": "14.x"
+  }
   "scripts": {
     "build": "gulp",
     "start": "node index.js",
