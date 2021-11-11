@@ -1,9 +1,13 @@
+const host = process.env.HOST || 'db.plovsfmlykwsczfaqkyn.supabase.co';
+const password = process.env.PASSWORD || '@lakhveer123';
+const db_port = process.env.DB_PORT || 5432;
+
 const dbCon = {
     user: 'postgres',
-    host: 'db.plovsfmlykwsczfaqkyn.supabase.co',
+    host: host,
     database: 'postgres',
-    password: '@lakhveer123',
-    port: 5432
+    password: password,
+    port: db_port
 }
 
 module.exports = dbCon;

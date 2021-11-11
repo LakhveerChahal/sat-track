@@ -10,7 +10,7 @@ export const environment = {
   production: false,
   apiBaseUrl: apiBaseUrl,
   apiKey: apiKey,
-  dbBaseUrl: 'localhost:3000/'
+  dbBaseUrl: window.location.origin
   // hasura: {
   //   hasuraBaseUrl: hasuraBaseUrl,
   //   hasuraSecretKey: hasuraSecretKey
