@@ -36,17 +36,17 @@ export class SearchComponent implements OnInit, AfterViewInit {
           return empty();
         }),
         map((res) => {
-          res.satellite.forEach((satellite) => {
+          res.forEach((satellite) => {
             const findIndex = this.dataSharingService.satellites.findIndex((s) => s.satId == +satellite.noradId);
             satellite.isRendered = findIndex != -1;
           });
           return res;
         })
       )
-      .subscribe((res: { satellite: SearchSatellite[] }) => {
+      .subscribe((res: SearchSatellite[] ) => {
         if(!res) { return; }
 
-        this.searchResults = res.satellite;
+        this.searchResults = res;
         this.isSearching = false;
       }, () => { this.isSearching = false });
   }

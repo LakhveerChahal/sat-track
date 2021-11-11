@@ -14,8 +14,6 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class MapService {
-  private hasuraSecretKey: string = environment.hasura.hasuraSecretKey;
-  
   constructor(private http: HttpClient, private urlFormationService: UrlFormationService) {
     Cesium.Ion.defaultAccessToken = constants.defaultAccessToken;
   }
@@ -26,11 +24,7 @@ export class MapService {
     );
   }
 
-  getSatelliteByName(satname: string): Observable<{ satellite: SearchSatellite[]}> {
-    let headers = new HttpHeaders();
-    headers = headers.append('x-hasura-admin-secret', this.hasuraSecretKey);
-    return this.http.get<{ satellite: SearchSatellite[]}>(this.urlFormationService.getSatelliteByNameUrl(satname + '%25'), {
-      headers: headers
-    });
+  getSatelliteByName(satname: string): Observable<SearchSatellite[]> {
+    return this.http.get<SearchSatellite[]>(this.urlFormationService.getSatelliteByNameUrl(satname));
   }
 }
