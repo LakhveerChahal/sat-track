@@ -29,22 +29,11 @@ function createBuildFolder() {
 
 function buildAngularCodeTask(cb) {
     log('building Angular code into the directory');
-        return exec(`cd ${paths.ang_src} && npm install @angular/cli -g && npm install`, function (err, stdout, stderr) {
-            log(stdout);
-            log(stderr);
-            log(err);
-        });
-    
-}
-
-function buildAngularCodeTask1(cb) {
-    log('building Angular code into the directory');
-        return exec(`cd ${paths.ang_src} && ng build --prod`, function (err, stdout, stderr) {
-            log(stdout);
-            log(stderr);
-            log(err);
-        });
-    
+    return exec(`cd ${paths.ang_src} && npm install && ng build --prod`, function (err, stdout, stderr) {
+        log(stdout);
+        log(stderr);
+        cb(err);
+    });
 }
 
 function copyAngularCodeTask() {
@@ -53,10 +42,15 @@ function copyAngularCodeTask() {
         .pipe(dest(`${paths.ang_dist_dest}`));
 }
 
+function deleteNodeModules() {
+    log('Deleting Node modules to decrease bundle size...');
+    return del(paths.ang_src + 'node_modules/**');
+}
+
 exports.default = series(
     clean,
     createBuildFolder,
     buildAngularCodeTask,
-    buildAngularCodeTask1,
-    copyAngularCodeTask
+    copyAngularCodeTask,
+    deleteNodeModules,
 );
