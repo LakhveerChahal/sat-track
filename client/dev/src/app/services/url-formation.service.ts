@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
 export class UrlFormationService {
   private baseUrl: string = environment.apiBaseUrl;
   private apiKey: string = environment.apiKey;
-  private dbBaseUrl: string = environment.hasura.hasuraBaseUrl;
+  private dbBaseUrl: string = environment.dbBaseUrl;
 
   constructor() { }
 
