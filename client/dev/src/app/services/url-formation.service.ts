@@ -16,6 +16,6 @@ export class UrlFormationService {
   }
 
   getSatelliteByNameUrl(satname: string): string {
-    return `${this.dbBaseUrl}satellite/${satname}`;
+    return `${this.dbBaseUrl}/satellite/${satname}`;
   }
 }
