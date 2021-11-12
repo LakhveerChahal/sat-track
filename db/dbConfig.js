@@ -7,7 +7,8 @@ const dbCon = {
     host: host,
     database: 'postgres',
     password: password,
-    port: db_port
+    port: db_port,
+    max: 4
 }
 
 module.exports = dbCon;
