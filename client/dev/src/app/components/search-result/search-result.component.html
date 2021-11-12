@@ -1,6 +1,12 @@
 <div class="result-wrapper">
     <app-loading-overlay *ngIf="isSearching" [message]="'Loading Results'" [borderRadius]="'0.5em'"></app-loading-overlay>
-    <div class="result-body">
+    <div class="result-body"
+        infiniteScroll
+        [infiniteScrollDistance]="1"
+        [infiniteScrollThrottle]="50"
+        (scrolled)="loadMoreResults()"
+        [scrollWindow]="false"
+        >
         <ng-container *ngFor="let result of searchResults">
             <div class="result">
                 <div class="result-name">

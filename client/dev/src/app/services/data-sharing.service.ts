@@ -8,7 +8,7 @@ import { Subject } from 'rxjs';
 export class DataSharingService {
   toggleSelectedSatellite: Subject<SatelliteModel> = new Subject<SatelliteModel>();
   readonly satellites: SatelliteModel[] = [];
-
+  loadMoreResults: Subject<void> = new Subject<void>();
   constructor() { }
 
   getToggleSelectedSatellite(): Subject<SatelliteModel> {
@@ -17,6 +17,14 @@ export class DataSharingService {
 
   setToggleSelectedSatellite(satellite: SatelliteModel): void {
     this.toggleSelectedSatellite.next(satellite);
+  }
+
+  getLoadMoreResults(): Subject<void> {
+    return this.loadMoreResults;
+  }
+
+  setLoadMoreResults(): void {
+    this.loadMoreResults.next();
   }
 
 }

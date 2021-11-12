@@ -23,4 +23,8 @@ export class SearchResultComponent implements OnInit {
     this.dataSharingService.setToggleSelectedSatellite(selectedSatellite);
   }
 
+  loadMoreResults(): void {
+    this.dataSharingService.setLoadMoreResults();
+  }
+
 }

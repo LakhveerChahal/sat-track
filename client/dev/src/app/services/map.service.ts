@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import * as Cesium from 'cesium';
 import { Observable } from 'rxjs';
 
@@ -24,7 +24,12 @@ export class MapService {
     );
   }
 
-  getSatelliteByName(satname: string): Observable<SearchSatellite[]> {
-    return this.http.get<SearchSatellite[]>(this.urlFormationService.getSatelliteByNameUrl(satname));
+  getSatelliteByName(satname: string, offset: number, limit: number): Observable<SearchSatellite[]> {
+    let params = new HttpParams();
+    params = params.append('offset', offset.toString());
+    params = params.append('limit', limit.toString());
+    return this.http.get<SearchSatellite[]>(this.urlFormationService.getSatelliteByNameUrl(satname), {
+      params: params
+    });
   }
 }
