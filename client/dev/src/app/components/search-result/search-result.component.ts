@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { SearchSatellite } from '@models/search-satellite-response.model';
 import { SatelliteModel } from '@models/satellite.model';
 import { DataSharingService } from '@services/data-sharing.service';
@@ -11,6 +11,7 @@ import { DataSharingService } from '@services/data-sharing.service';
 export class SearchResultComponent implements OnInit {
   @Input('searchResults') searchResults: SearchSatellite[] = [];
   @Input('isSearching') isSearching: boolean = false;
+  @Output('loadNextResults') loadNextResults = new EventEmitter<void>();
 
   constructor(private dataSharingService: DataSharingService) { }
 
@@ -24,7 +25,7 @@ export class SearchResultComponent implements OnInit {
   }
 
   loadMoreResults(): void {
-    this.dataSharingService.setLoadMoreResults();
+    this.loadNextResults.emit();
   }
 
 }

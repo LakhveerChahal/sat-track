@@ -51,13 +51,6 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
         this.searchResults = this.searchResults.concat(res);
         this.isSearching = false;
       }, () => { this.isSearching = false }));
-
-      this.subscription.add(
-        this.dataSharingService.getLoadMoreResults().subscribe(() => {
-          this.offset += constants.offset;
-          this.initiateSearch();
-        })
-      );
   }
 
   ngAfterViewInit(): void {
@@ -86,5 +79,10 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
     this.searchEl.nativeElement.value = '';
     const keyUpEvent = new KeyboardEvent('keyup');
     this.searchEl.nativeElement.dispatchEvent(keyUpEvent);
+  }
+
+  loadMoreResults(): void {
+    this.offset += constants.offset;
+    this.initiateSearch();
   }
 }
