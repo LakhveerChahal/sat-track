@@ -4,7 +4,7 @@ const satelliteRouter = require('./satellite.route');
 
 const router = express.Router();
 
-router.use('/login', loginRouter);
+router.use('/user', loginRouter);
 router.use('/satellite', satelliteRouter);
 
 module.exports = router;

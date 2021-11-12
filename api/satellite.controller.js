@@ -1,13 +1,10 @@
-const { Pool } = require('pg');
-const dbConn = require('../dbConfig');
 const humps = require('lodash-humps');
-
-const pool = new Pool(dbConn);
+const satelliteService = require('../services/satellite.service');
 
 const getSatelliteByName = async (req, res) => {
     const satname = req.params.satname;
-    const result = await pool.query("select norad_id, satellite_name from satellite where satellite_name ilike '%' || $1 ||'%' limit 10", [satname]);
-    res.send(humps(result.rows));
+    const result = await satelliteService.getSatelliteByName(satname);
+    res.send(humps(result));
 };
 
 module.exports = {
