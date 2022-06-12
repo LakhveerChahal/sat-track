@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,6 +13,7 @@ import { SearchResultComponent } from './components/search-result/search-result.
 import { SearchComponent } from './components/search/search.component';
 import { LoadingOverlayComponent } from './shared/loading-overlay/loading-overlay.component';
 import { LoaderComponent } from './shared/loader/loader.component';
+import { UserComponent } from './components/user/user.component';
 
 @NgModule({
   declarations: [
@@ -21,9 +23,11 @@ import { LoaderComponent } from './shared/loader/loader.component';
     SearchResultComponent,
     SearchComponent,
     LoadingOverlayComponent,
-    LoaderComponent
+    LoaderComponent,
+    UserComponent
   ],
   imports: [
+    ReactiveFormsModule,
     InfiniteScrollModule,
     BrowserModule,
     AppRoutingModule,
