@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 // For n2yo API
 const apiBaseUrl = 'https://api.n2yo.com/rest/v1/satellite/';
-const apiKey = 'YC9DQJ-37AG2W-N5G4NY-4KM3';
+const apiKey = 'TQ2VXX-HCXNFU-8QUQVR-4VZI';
 
 // For hasura API
 // const hasuraSecretKey = 'R6jbMtmywtXzMGapRCwHXvb4D919KZrSsq3jz7RERjCi6jXv4XPcqQVcEShIrxZT';
