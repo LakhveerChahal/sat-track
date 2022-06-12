@@ -11,14 +11,14 @@ const paths = {
 }
 
 function clean() {
-    log('Deleting existing build folders...');
+    log('[1/7] Deleting existing build folders...');
     return del(paths.ang_dist_dest + '**', { force: true });
 }
 
 function createBuildFolder() {
     const dir = paths.ang_dist_dest;
 
-    log(`Creating the folder if not exist  ${dir}`);
+    log(`[2/7] Creating the folder if not exist  ${dir}`);
     if(!fs.existsSync(dir)) {
         fs.mkdirSync(dir);
         log('📁  folder created:', dir);
@@ -27,9 +27,27 @@ function createBuildFolder() {
     return Promise.resolve('created build folder if it was needed!');
 }
 
+function installAngularCLI(cb) {
+    log('[3/7] installing Angular CLI...');
+    return exec(`cd ${paths.ang_src} && npm i -g @angular/cli`, function (err, stdout, stderr) {
+        log(stdout);
+        log(stderr);
+        cb(err);
+    });
+}
+
+function installNpmDependencies(cb) {
+    log('[4/7] installing dependencies...');
+    return exec(`cd ${paths.ang_src} && npm i`, function (err, stdout, stderr) {
+        log(stdout);
+        log(stderr);
+        cb(err);
+    });
+}
+
 function buildAngularCodeTask(cb) {
-    log('building Angular code into the directory');
-    return exec(`cd ${paths.ang_src} && npm install -g @angular/cli && npm install && ng build --prod`, function (err, stdout, stderr) {
+    log('[5/7] building Angular code into the directory');
+    return exec(`cd ${paths.ang_src} && ng build --prod`, function (err, stdout, stderr) {
         log(stdout);
         log(stderr);
         cb(err);
@@ -37,19 +55,21 @@ function buildAngularCodeTask(cb) {
 }
 
 function copyAngularCodeTask() {
-    log('copying Angular code into the directory');
+    log('[6/7] copying Angular code into the directory');
     return src(`${paths.ang_dist_src}`)
         .pipe(dest(`${paths.ang_dist_dest}`));
 }
 
 function deleteNodeModules() {
-    log('Deleting Node modules to decrease bundle size...');
+    log('[7/7] Deleting Node modules to decrease bundle size...');
     return del(paths.ang_src + 'node_modules/**');
 }
 
 exports.default = series(
     clean,
     createBuildFolder,
+    installAngularCLI,
+    installNpmDependencies,
     buildAngularCodeTask,
     copyAngularCodeTask,
     deleteNodeModules,
